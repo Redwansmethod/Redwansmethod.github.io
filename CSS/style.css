@@ -24,6 +24,7 @@ header {
     padding: 20px 10px;
     border-bottom: 1px solid #ddd;
     margin-bottom: 20px;
+    margin-top: 10px;
 }
 body {
     display: flex;
@@ -60,6 +61,7 @@ footer {
 
 nav {
     position: relative;
+    margin-bottom: 10px;
 }
 
 .menu-icon {
