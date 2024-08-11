@@ -22,6 +22,8 @@ header {
     align-items: center;
     color: #fff;
     padding: 20px 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
 }
 body {
     display: flex;
@@ -131,7 +133,6 @@ nav a:hover {
     text-align: center;
     font-family: "Poppins",system-ui;
     letter-spacing: 1px;
-    font-size: 25px;
 }
 .notice-box h3 {
     margin-top: 0;
@@ -152,6 +153,7 @@ td, th {
     font-size: 17px;
     font-family: "Poppins",system-ui;
     font-weight: 300;
+    text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -175,12 +177,13 @@ td, th {
         color: #fff;
     }
     nav a:hover{scale: 1;background-color: #00103d;}
-    .container {width: 85%;}
-    table, td, th {font-size: 8px;}
+    .container {width: 85%; font-size: 15px;}
+    table, td, th {font-size: 10px;}
     footer {
         padding: 0.5em 0;
     }
     .footer-content{font-size: 10px;} .footer-content small{font-size: 14px;}
+    .again{width: 30%;}
 }
 
 @media (min-width: 769px) {

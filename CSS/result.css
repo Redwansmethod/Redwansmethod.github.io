@@ -37,7 +37,7 @@ body {
 /* Header styles */
 header {
     background-color: #52baff;
-    color: black;
+    color: #00103d;
     padding: 10px;
     border-radius: 8px 8px 0 0;
     margin-bottom: 30px; /* Add margin below the header */
@@ -86,7 +86,7 @@ header h1 {
 
 .result-checker button {
     background-color: #52baff;
-    color: black;
+    color: #00103d;
     border: none;
     border-radius: 5px;
     cursor: pointer;

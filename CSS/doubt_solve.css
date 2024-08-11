@@ -9,17 +9,18 @@
 /* Body styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #defff9; /* Light gray background */
+    background-color: #fff; /* Light gray background */
 }
 /* Header styles */
 header {
-    background-color: #333; /* Dark background for header */
-    color: #fff; /* White text color */
+    background-color: #fff; /* Dark background for header */
+    color: #0255bd; /* White text color */
     text-align: center; /* Center-align text */
     padding: 30px 0; /* Padding for top and bottom */
     font-family:"Poppins",system-ui;
     letter-spacing: 1px;
     font-size: 15px;
+    border-bottom: 1px solid #ddd;
 }
 
 header h1 {
