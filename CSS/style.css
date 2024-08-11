@@ -183,7 +183,7 @@ td, th {
         padding: 0.5em 0;
     }
     .footer-content{font-size: 10px;} .footer-content small{font-size: 14px;}
-    .again{width: 30%;}
+    .again{width: 30%; scale: 1;}
 }
 
 @media (min-width: 769px) {
@@ -196,7 +196,7 @@ td, th {
     nav a {padding: 10px 20px;}
     .container {width: 85%}
     .again:hover{
-        scale: 1.1;
+        scale: 1.05;
         transition: scale 0.2s;
     }
 }
