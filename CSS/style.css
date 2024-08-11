@@ -100,7 +100,7 @@ nav a:hover {
     background-color: #f3f3f3;
     transition: background-color 0.3s;
     border-radius: 5px;
-    scale: 1.1;
+    scale: 1.05;
     transition: scale 0.1s;
 }
 
