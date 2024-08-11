@@ -4,7 +4,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #defff9;
+    background-color: #fff;
 }
 /*Scroll Bar*/
   /* width */
@@ -20,7 +20,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333;
     color: #fff;
     padding: 20px 10px;
 }
@@ -33,7 +32,8 @@ body {
 /*Footer*/
 .footer{margin-top: auto;}
 footer {
-    background-color: #cdfff7; color: white;
+    background-color: #fcfcfc;
+    border-top: 1px solid #ddd;
     text-align: center;
     padding: 20px 10px;
     margin-top: auto;} /*using footer div place on 100px down from top*/
@@ -84,17 +84,18 @@ nav li {
 .again{
     margin-left: 5px;
     transition: scale 0.2s;
+    width: 15%;
 }
 nav a {
-    color: #fff;
+    color: #000000;
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 5px 10px;
     display: inline-block;
     transition: background-color 0.3s, scale 0.2s;
 }
 
 nav a:hover {
-    background-color: #444;
+    background-color: #f3f3f3;
     transition: background-color 0.3s;
     border-radius: 5px;
     scale: 1.1;
@@ -106,24 +107,25 @@ nav a:hover {
     margin: 20px auto;
     padding: 0 20px;
     overflow: hidden;
-    border: 1px solid black;
+    border: 1px solid #ddd;
     padding: 20px;
     border-radius: 10px;
-    background-color: #cdfff7;
+    background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     font-family: "Baloo Da 2",system-ui;
     font-size: 20px;
 }
 .content {
-    background-color: #cdfff7;
+    background-color: #ffffff;
     padding: 20px;
     margin-top: 20px;
     border-radius: 5px;
 }
 .notice-box {
-    border: 1px solid black;
+    border: 1px solid #aaaaaa;
     padding: 20px;
     border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .routine-box h3{
     text-align: center;
@@ -140,10 +142,11 @@ nav a:hover {
 table {
     width: 100%;
     border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 td, th {
-    border: 1px solid rgb(192, 192, 192);
+    border: 1px solid #c0c0c0;
     padding: 8px;
     text-align: center;
     font-size: 17px;
@@ -152,7 +155,7 @@ td, th {
 }
 
 @media (max-width: 768px) {
-    .menu-icon {display: block;}
+    .menu-icon {display: block;color: #00103d;}
     nav ul {
         display: block;
         position: fixed;
@@ -160,18 +163,18 @@ td, th {
         top: 0;
         height: 100%;
         width: 200px;
-        background-color: #333;
+        background-color: #00103d;
         padding-top: 60px;
         text-align: left;
         transform: translateX(100%);
     }
-    nav li {display: block;}
+    nav li {display: block; margin-bottom: 5px;}
     nav a {
         padding: 10px;
         display: block;
         color: #fff;
     }
-    nav a:hover{scale: 1;}
+    nav a:hover{scale: 1;background-color: #00103d;}
     .container {width: 85%;}
     table, td, th {font-size: 8px;}
     footer {

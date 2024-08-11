@@ -5,16 +5,17 @@
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-        background-color: #defff9;
+        background-color: #fff;
     }
     .header {
-        background-color: #333;
-        color: #fff;
+        background-color: #fff;
+        color: #0255bd;
         text-align: center;
         padding: 10px 0;
         margin-bottom: 20px;
         font-family: "Poppins",system-ui;
         letter-spacing: 1px;
+        border-bottom: 1px solid #ddd;
     }
     .container {
         display: flex;
@@ -25,12 +26,12 @@
     .box {
         width: 200px;
         align-content: center;
-        background-color: #cdfff7;
+        background-color: #f4faff;
         border: 1px solid #333; border-radius: 10px;
         margin: 20px;
         font-size: 21px; font-family: "Baloo Da 2",system-ui;
         padding: 30px;
-        cursor: pointer; transition: background-color 0.3s ,;
+        cursor: pointer; transition: background-color 0.3s , padding 0.3s, scale 0.1s;
     }
     .box:first-child{display: none;} /*hide the header row*/
     .box-title {
@@ -54,8 +55,9 @@
         text-decoration: underline; /* Underline links on hover */
     }
     .box:hover {
-        background-color: #defff9; /* Light gray background on hover */
-        transition: background-color 0.3s;
+        background-color: #fff; /* Light gray background on hover */
+        transition: background-color 0.3s, scale 0.1s, padding 0.3s;
+        scale: 1.01;
     }
     
 /* Responsive design */
