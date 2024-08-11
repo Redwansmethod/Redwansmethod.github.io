@@ -118,6 +118,7 @@ nav a:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     font-family: "Baloo Da 2",system-ui;
     font-size: 20px;
+    margin-top: 1px; /*রাত*/
 }
 .content {
     background-color: #ffffff;
@@ -179,8 +180,8 @@ td, th {
         color: #fff;
     }
     nav a:hover{scale: 1;background-color: #00103d;}
-    .container {width: 85%; font-size: 15px;}
-    table, td, th {font-size: 10px;}
+    .container {width: 85%; font-size: 20px;}
+    table, td, th {font-size: 8px;}
     footer {
         padding: 0.5em 0;
     }
