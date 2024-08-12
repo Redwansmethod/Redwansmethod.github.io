@@ -185,6 +185,7 @@ td, th {
     footer {
         padding: 0.5em 0;
     }
+    nav a:active{background-color: #00103d;}
     .footer-content{font-size: 10px;} .footer-content small{font-size: 14px;}
     .again{width: 30%; scale: 1;}
 }
