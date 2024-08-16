@@ -35,7 +35,7 @@ function goBack() {
 
             const rows = data.values;
             const headers = rows[0];
-            const studentIndex = headers.indexOf('Your Phone Number = Student ID');
+            const studentIndex = headers.indexOf('Your Phone Number ');
             const nameIndex = headers.indexOf('Name');
             const scoreIndex = headers.indexOf('Score');
             const positionIndex = headers.indexOf('Position');
