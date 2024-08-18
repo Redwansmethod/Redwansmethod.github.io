@@ -84,6 +84,23 @@
         <div id="routine-table"></div>
       </div>
     </div>
+    <div class="table-container"> 
+      <h3>📝 Exam Schedule</h3>
+      <table id="scheduleTable">
+          <thead>
+              <tr>
+                  <th>Subject</th>
+                  <th>Exam No</th>
+                  <th>Chapter No</th>
+                  <th>Date</th>
+                  <th>Exam Link</th>
+              </tr>
+          </thead>
+          <tbody>
+              <!-- Data will be inserted here -->
+          </tbody>
+      </table>
+    </div>
   </div>
 
   <script>
@@ -136,6 +153,44 @@
           footer.style.width = "100%";
       }
   });
+
+// script start for exam schedul on main page
+        const sheetIDSchedule = '1NLpaHHSWiwKmszSWX-Ivxxq2MOBS921VwljoRfuThSw';
+        const apiKeySchedule = 'AIzaSyBooe-Fdm9nJRv1buEzPA8ayyRPPXtPQbs'; // Replace with your API key
+        const sheetNameSchedule = 'Sheet1'; // Assuming the sheet name is 'Sheet1'
+
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetIDSchedule}/values/${sheetNameSchedule}?key=${apiKeySchedule}`;
+
+        $.getJSON(url, function(data) {
+            const rows = data.values;
+            
+            // Get today's date and format it as DD-MM-YYYY
+            const today = new Date();
+            const todayFormatted = today.toLocaleDateString('en-GB').split('/').reverse().join('-');
+
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                const date = row[3]; // Date is in the 4th column (D)
+                let highlightClass = '';
+
+                if (date === todayFormatted) {
+                    highlightClass = 'highlight_exam';
+                }
+
+                // Check if Exam Link is not 'none' and create a hyperlink
+                const examLink = row[4] !== 'none' ? `<a href="${row[4]}" target="_blank">Exam Link</a>` : 'none';
+
+                $('#scheduleTable tbody').append(
+                    `<tr class="${highlightClass}">
+                        <td>${row[0]}</td>
+                        <td>${row[1]}</td>
+                        <td>${row[2]}</td>
+                        <td>${row[3]}</td>
+                        <td>${examLink}</td>
+                    </tr>`
+                );
+            }
+        });
 </script>
 </body>
 </html>

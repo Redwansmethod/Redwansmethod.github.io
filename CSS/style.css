@@ -143,13 +143,13 @@ nav a:hover {
     letter-spacing: 1px;
 }
 
-table {
+.routine-box table {
     width: 100%;
     border-collapse: collapse;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-td, th {
+.routine-box td, th {
     border: 1px solid #c0c0c0;
     padding: 8px;
     text-align: center;
@@ -158,7 +158,54 @@ td, th {
     font-weight: 300;
     text-align: center;
 }
-
+/*Schedule Start*/
+.table-container{
+    padding-bottom: 20px;
+}
+.table-container h3{
+    text-align: center;
+    font-family: "Poppins",system-ui;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+#scheduleTable {
+    width: 97%;
+    border-collapse: collapse;
+    margin: auto;
+    font-family: "Poppins",system-ui;
+}
+#scheduleTable table, th, td {
+    border: 1px solid #ddd;
+}
+#scheduleTable th, td {
+    border: 1px solid #c0c0c0;
+    padding: 8px;
+    text-align: center;
+    font-size: 17px;
+    font-family: "Poppins",system-ui;
+    font-weight: 300;
+    text-align: center;
+}
+#scheduleTable th {
+    background-color: #fcfcfc;
+}
+.highlight_exam {
+    background-color: #ffeb3b; /* Yellow background for highlighted row */
+}
+#scheduleTable td a{
+    text-decoration: none;
+    color: #1a73e8;
+}
+#scheduleTable td a:hover{
+    text-decoration: underline;
+}
+/*Schedule End*/
+@media screen and (max-width: 600px) {
+    th, td {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
 @media (max-width: 768px) {
     .menu-icon {display: block;color: #00103d;}
     nav ul {
