@@ -228,7 +228,9 @@ nav a:hover {
     }
     nav a:hover{scale: 1;background-color: #00103d;}
     .container {width: 85%; font-size: 20px;}
-    table, td, th {font-size: 8px;}
+    .notice-box{font-size: 16px;}
+    .routine-box table, .routine-box td, .routine-box th {font-size: 8px;}
+    #scheduleTable table, #scheduleTable td, #scheduleTable th {font-size: 8px;}
     footer {
         padding: 0.5em 0;
     }
