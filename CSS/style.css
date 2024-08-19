@@ -158,6 +158,10 @@ nav a:hover {
     font-weight: 300;
     text-align: center;
 }
+.routine-box tr:first-child{
+    background-color: #fcfcfc;
+    border-bottom: 3px solid #ddd;
+}
 /*Schedule Start*/
 .table-container{
     padding-bottom: 20px;
@@ -188,6 +192,7 @@ nav a:hover {
 }
 #scheduleTable th {
     background-color: #fcfcfc;
+    border-bottom: 3px solid #ddd;
 }
 .highlight_exam {
     background-color: #ffeb3b; /* Yellow background for highlighted row */
