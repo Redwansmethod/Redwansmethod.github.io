@@ -36,55 +36,98 @@ main {
 }
 
 /* Box styles */
-.box {
-    width: 230px;
-    height: 115px;
-    background-color: #fff; /* White background */
-    border: 2px solid #000; /* Black border */
+.team {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.member {
+    background-color: white;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    padding: 20px;
     text-align: center;
-    line-height: 100px; /* Center text vertically */
-    margin: 20px;
-    font-size: 20px;
+    width: 100%;
+    max-width: 350px;
+    flex: 1 1 calc(33.333% - 40px); /* responsive width calculation */
+    box-sizing: border-box;
+    scale: 1;
+    transition: all 0.3s;
 }
 
-/* Specific box background colors */
-.box-general-math {
-    background-color: #6effe2; /* Light gray */
+.member img {
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    margin-bottom: 15px;
 }
 
-.box-higher-math {
-    background-color: #fccb63;/* Lighter gray */   
+.member h2 {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    font-family: "Poppins", sans-serif;
 }
 
-.box-physics {
-    background-color: #4ab1ff; /* Even lighter gray */
+.member p {
+    margin: 10px 0;
+    font-family: "Poppins", sans-serif;
 }
 
-.box-chemistry {
-    background-color: #D6A2E8; /* Lightest gray */
+.member a {
+    text-decoration: none;
+    color: #0073e6;
+    font-size: 1em;
 }
 
-.box a {
-    text-decoration: none; /* Remove underline from links */
-    color: #000; /* Black text color */
-    display: block;
-    height: 100%;
+.member a i {
+    margin-right: 5px;
 }
 
-.box:hover {
-    background-color: #f0f0f0; /* Light gray background on hover */
+.member:hover{
+    scale: 1.025;
+}
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+    .member {
+        flex: 1 1 calc(50% - 40px);
+    }
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
-    .back-button {display: none;}
+    .member {
+        flex: 1 1 calc(100% - 40px);
+        scale: 1;
+    }
 }
 
 @media (max-width: 480px) {
-    .back-button {
-        font-size: 14px;
-        padding: 5px 5px;border-radius: 50px;
-        background-color: #defff9;color: #333;
+    .back-button {display: none;}
+    header {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .member img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .member h2 {
+        font-size: 1.2em;
+    }
+
+    .member a {
+        font-size: 1em;
+    }
+    header {
+        padding: 30px 0;
     }
 }
