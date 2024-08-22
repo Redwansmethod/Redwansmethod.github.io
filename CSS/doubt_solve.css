@@ -10,6 +10,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #fff; /* Light gray background */
+    overflow-x: hidden;
 }
 /* Header styles */
 header {
@@ -91,6 +92,21 @@ main {
 .member:hover{
     scale: 1.025;
 }
+
+/*Footer*/
+.footer{margin-top: auto;}
+footer {
+    background-color: #fcfcfc;
+    border-top: 1px solid #ddd;
+    text-align: center;
+    padding: 20px 10px;
+    margin-top: auto;} /*using footer div place on 100px down from top*/
+.footer-content a{text-decoration: none; color: #000;}
+.footer-content{font-size: 13px; font-family: "Poppins"; color: #000;}
+.footer-content small {font-size: 16px; font-family: "Baloo Da 2"; color: #4900d1;
+    border-bottom: 1px solid black;}
+.footer-content p, .footer-content small {margin: 0.5em 0;}
+
 /* Media Queries for Responsiveness */
 @media (max-width: 1024px) {
     .member {
@@ -103,6 +119,7 @@ main {
         flex: 1 1 calc(100% - 40px);
         scale: 1;
     }
+    .footer-content{font-size: 10px;} .footer-content small{font-size: 14px;}
 }
 
 @media (max-width: 480px) {
