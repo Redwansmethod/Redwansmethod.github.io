@@ -5,7 +5,16 @@
     margin: 0;
     padding: 0;
 }
-
+/*Scroll Bar*/
+  /* width */
+  ::-webkit-scrollbar { width: 6px;}
+  /* Track */
+  ::-webkit-scrollbar-track {background: #fffefe;} 
+  /* Handle */
+  ::-webkit-scrollbar-thumb {background: #888; border-radius: 5px;}
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {background: #6d6d6d;}
+  
 /* Body styles */
 body {
     font-family: Arial, sans-serif;
@@ -21,7 +30,6 @@ header {
     font-family:"Poppins",system-ui;
     letter-spacing: 1px;
     font-size: 15px;
-    border-bottom: 1px solid #ddd;
 }
 
 header h1 {
@@ -44,8 +52,15 @@ main {
     padding: 20px;
     gap: 20px;
 }
-
-.member {
+.sub_head{
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    letter-spacing: 1px;
+}
+.teacher,.admin, .solver {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -60,7 +75,7 @@ main {
     transition: all 0.3s;
 }
 
-.member img {
+.teacher img, .admin img, .solver img {
     border-radius: 50%;
     width: 130px;
     height: 130px;
@@ -68,31 +83,36 @@ main {
     margin-bottom: 15px;
 }
 
-.member h2 {
+.teacher h2, .admin h2, .solver h2 {
     font-size: 1.3em;
     margin-bottom: 10px;
     font-family: "Poppins", sans-serif;
 }
 
-.member p {
+.teacher p, .admin p, .solver p {
     margin: 10px 0;
     font-family: "Poppins", sans-serif;
 }
 
-.member a {
+.teacher a, .admin a, .solver a {
     text-decoration: none;
     color: #0073e6;
     font-size: 1em;
 }
 
-.member a i {
+.teacher a i, .admin a i, .solver a i {
     margin-right: 5px;
 }
-
-.member:hover{
+/*Hovers*/
+.teacher:hover{
     scale: 1.025;
 }
-
+.admin:hover{
+    scale: 1.025;
+}
+.solver:hover{
+    scale: 1.025;
+}
 /*Footer*/
 .footer{margin-top: auto;}
 footer {
@@ -109,13 +129,13 @@ footer {
 
 /* Media Queries for Responsiveness */
 @media (max-width: 1024px) {
-    .member {
+    .teacher,.admin, .solver {
         flex: 1 1 calc(50% - 40px);
     }
 }
 
 @media (max-width: 768px) {
-    .member {
+    .teacher,.admin, .solver {
         flex: 1 1 calc(100% - 40px);
         scale: 1;
     }
@@ -132,16 +152,16 @@ footer {
         font-size: 1.5em;
     }
 
-    .member img {
+    .teacher img, .admin img, .solver img {
         width: 120px;
         height: 120px;
     }
 
-    .member h2 {
+    .teacher h2, .admin h2, .solver h2 {
         font-size: 1.2em;
     }
 
-    .member a {
+    .teacher a, .admin a, .solver a {
         font-size: 1em;
     }
     header {
