@@ -60,7 +60,7 @@ main {
     padding: 10px;
     letter-spacing: 1px;
 }
-.teacher,.admin, .solver, .moderator {
+.teacher,.director, .solver, .moderator {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -75,7 +75,7 @@ main {
     transition: all 0.3s;
 }
 
-.teacher img, .admin img, .solver img , .moderator img {
+.teacher img, .director img, .solver img , .moderator img {
     border-radius: 50%;
     width: 130px;
     height: 130px;
@@ -83,31 +83,31 @@ main {
     margin-bottom: 15px;
 }
 
-.teacher h2, .admin h2, .solver h2, .moderator h2 {
+.teacher h2, .director h2, .solver h2, .moderator h2 {
     font-size: 1.3em;
     margin-bottom: 10px;
     font-family: "Poppins", sans-serif;
 }
 
-.teacher p, .admin p, .solver p, .moderator p {
+.teacher p, .director p, .solver p, .moderator p {
     margin: 10px 0;
     font-family: "Poppins", sans-serif;
 }
 
-.teacher a, .admin a, .solver a, .moderator a {
+.teacher a, .director a, .solver a, .moderator a {
     text-decoration: none;
     color: #0073e6;
     font-size: 1em;
 }
 
-.teacher a i, .admin a i, .solver a i, .moderator a i {
+.teacher a i, .director a i, .solver a i, .moderator a i {
     margin-right: 5px;
 }
 /*Hovers*/
 .teacher:hover{
     scale: 1.025;
 }
-.admin:hover{
+.director:hover{
     scale: 1.025;
 }
 .solver:hover{
@@ -132,13 +132,13 @@ footer {
 
 /* Media Queries for Responsiveness */
 @media (max-width: 1024px) {
-    .teacher,.admin, .solver, .moderator {
+    .teacher,.director, .solver, .moderator{
         flex: 1 1 calc(50% - 40px);
     }
 }
 
 @media (max-width: 768px) {
-    .teacher,.admin, .solver, .moderator {
+    .teacher,.director, .solver, .moderator{
         flex: 1 1 calc(100% - 40px);
         scale: 1;
     }
@@ -155,16 +155,16 @@ footer {
         font-size: 1.5em;
     }
 
-    .teacher img, .admin img, .solver img, .moderator {
+    .teacher img, .director img, .solver img, .moderator img {
         width: 120px;
         height: 120px;
     }
 
-    .teacher h2, .admin h2, .solver h2, .moderator h2{
+    .teacher h2, .director h2, .solver h2, .moderator h2{
         font-size: 1.2em;
     }
 
-    .teacher a, .admin a, .solver a, .moderator a {
+    .teacher a, .director a, .solver a, .moderator a {
         font-size: 1em;
     }
     header {
