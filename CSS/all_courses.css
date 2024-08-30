@@ -1,0 +1,144 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+header {
+    background-color: #fff;
+    color: #0255bd;
+    text-align: center;
+    padding: 25px 0;
+    font-family: "Poppins", sans-serif;
+    letter-spacing: 1px;
+    font-size: 15px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.course-category {
+    text-align: left;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Responsive Grid Layout */
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Limit to max 5 columns */
+    gap: 15px;
+    padding: 15px;
+    margin: 0 100px;
+}
+
+.course-grid-title{
+    font-size: 25px;
+    margin: 0 130px;
+}
+.course-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
+    background-color: #fff;
+    margin: 15px;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+}
+
+.course-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.course-card h3 {
+    font-size: 16px;
+    margin: 10px;
+}
+
+.course-card p {
+    font-size: 14px;
+    color: #666;
+    margin: 10px;
+}
+
+.course-price {
+    font-size: 16px;
+    color: green;
+    margin: 10px;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+    .course-grid-title{
+        text-align: center;
+    }
+
+    .course-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin: 0;
+    }
+    .hsc{
+        width: 35%;
+        height: 35%;
+    }
+    .course-card h3 {
+        font-size: 14px;
+        margin: 8px;
+    }
+
+    .course-card p, .course-price {
+        font-size: 13px;
+        margin: 8px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .course-grid-title{
+        text-align: center;
+    }
+    
+    .hsc{
+        height: 50%;
+        width: 50%;
+    }
+
+    .course-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
+        padding: 10px;
+        margin: 0;
+    }
+
+    .course-card {
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .course-card h3 {
+        font-size: 13px;
+        margin: 6px;
+    }
+
+    .course-card p, .course-price {
+        font-size: 12px;
+        margin: 6px;
+    }
+}
