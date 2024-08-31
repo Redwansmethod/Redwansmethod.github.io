@@ -64,7 +64,7 @@ header h1 {
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Styling for Right Side Content */
@@ -73,7 +73,8 @@ header h1 {
     background-color: #fff;
     padding: 13px;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    height: 30%;
 }
 
 .video-container {
