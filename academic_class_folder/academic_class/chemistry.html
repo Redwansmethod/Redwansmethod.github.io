@@ -1,26 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chemistry</title>
-<link rel="icon" type="image/x-icon" href="/Assets/favicon.png">
-<link rel="stylesheet" href="/CSS/all.css">
-<link rel="stylesheet" href="/CSS/back_button.css">
-<script src="/JS/disable.js"></script>
-<script src="/JS/academic.js"></script>
-<script src="/secret.js"></script>
-<script> const sheetName = 'chemistry';</script> <!--Subject Sheet Name-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry</title>
+    <link rel="icon" type="image/x-icon" href="/Assets/favicon.png">
+    <link rel="stylesheet" href="/CSS/all.css">
+    <link rel="stylesheet" href="/CSS/back_button.css">
+    <script src="/JS/disable.js"></script>
+    <script src="/JS/academic.js"></script>
+    <script src="/secret.js"></script>
+    <script> const sheetName = 'chemistry';</script> <!--Subject Sheet Name-->
+    <style>
+        /* Basic CSS to initially hide content */
+        #content {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <!-- Back button -->
-<button class="back-button" onclick="goBack()">←</button>
-    <div class="header">
-        <h1>Chemistry</h1>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Main Content -->
+    <div id="content">
+        <!-- Back button -->
+        <button class="back-button" onclick="goBack()">←</button>
+        <div class="header">
+            <h1>Chemistry</h1>
+        </div>
+        <div class="container" id="box-container">
+            <!-- Boxes will be dynamically generated here -->
+        </div>
     </div>
-    <div class="container" id="box-container">
-        
-        <!-- Boxes will be dynamically generated here -->
-    </div>
+
+    <!-- JavaScript for loading content -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // Load preloader content
+                const preloaderResponse = await fetch('/common/preloader.html');
+                const preloaderHTML = await preloaderResponse.text();
+                document.getElementById('preloader').innerHTML = preloaderHTML;
+
+                // Load the rest of the page content
+                // Example for dynamically adding content to box-container
+                // You can adjust this part based on how you fetch and display your content
+
+                // Simulate content load
+                // You should replace this with your actual content fetching logic
+                await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate delay
+
+                // Hide preloader and show main content
+                document.getElementById('preloader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('preloader').style.display = 'none';
+                    document.getElementById('content').style.display = 'block';
+                }, 500); // Match this delay with the transition duration
+            } catch (error) {
+                console.error('Error loading content:', error);
+            }
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </body>
 </html>

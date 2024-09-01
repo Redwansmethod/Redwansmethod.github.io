@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Index</title>
-  <link rel="stylesheet" href="/CSS/all_courses.css">
-  <link rel="icon" type="image/x-icon" href="/Assets/favicon.png">
-  <script src="/JS/disable.js"></script>
+    <link rel="stylesheet" href="/CSS/all_courses.css">
+    <link rel="icon" type="image/x-icon" href="/Assets/favicon.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/JS/disable.js"></script>
     <!-- Link to Font Awesome for the Cart Icon -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
         <h1>Courses</h1>
     </header>
-    <!--Combo-->
+    
+    <!-- Combo -->
     <h1 class="course-grid-title">Combo</h1>
     <div class="course-grid">
         <!-- Course Card 1 -->
@@ -40,7 +42,7 @@
         </div>
     </div>
     
-    <!--Subjectwise-->
+    <!-- Subjectwise -->
     <h1 class="course-grid-title">Subjectwise</h1>
     <div class="course-grid">
         <!-- Course Card 1 -->
@@ -73,7 +75,7 @@
         </div>
     </div>
 
-    <!--HSC-->
+    <!-- HSC -->
     <h1 class="course-grid-title">HSC</h1>
     <div class="course-grid hsc">
         <!-- Course Card 1 -->
@@ -83,5 +85,18 @@
             <p>Redwan Hushen</p>
             <div class="course-price">৳ 2490</div>
         </div>
+    </div>
+
+    <!-- Footer + Preloader -->
+    <div class="preloader"></div>
+    <footer class="footer-content"></footer>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.footer-content').load('/common/footer.html', function() {
+                hidePreloader();
+            });
+            $('.preloader').load('/common/preloader.html');
+        });
+    </script>
 </body>
 </html>
