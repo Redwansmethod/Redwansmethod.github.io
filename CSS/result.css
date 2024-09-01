@@ -141,19 +141,6 @@ header h1 {
 .back-button.hidden {top: -30px; /* Move the button out of view when hidden */}
 .back-button:hover {background-color: #ddd; transition: background-color 0.3s;}
 
-/* Footer styles */
-footer {
-    background-color: #fcfcfc;
-    border-top: 1px solid #ddd;
-    text-align: center;
-    padding: 20px 10px;
-    margin-top: auto;} /*using footer div place on 100px down from top*/
-.footer-content a{text-decoration: none; color: #000;}
-.footer-content{font-size: 13px; font-family: "Poppins"; color: #000;}
-.footer-content small {font-size: 16px; font-family: "Baloo Da 2"; color: #4900d1;
-    border-bottom: 1px solid black;}
-.footer-content p, .footer-content small {margin: 0.5em 0;}
-
 /* Responsive design */
 @media (max-width: 768px) {
     .back-button {
@@ -178,8 +165,5 @@ footer {
         padding: 10px; /* Further reduced padding for very small screens */
         margin-top: 80px;
         font-size: 14px;
-    }
-    footer {padding: 15px 10px;
-    .footer-content{font-size: 10px;} .footer-content small{font-size: 14px;}
     }
 }

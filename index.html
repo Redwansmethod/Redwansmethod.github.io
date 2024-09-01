@@ -136,24 +136,12 @@
     window.addEventListener('resize', updateMenuEventListeners);
   </script>
 <!--Footer-->
-<footer>
-  <div class="footer-content">
-      <small>যোগাযোগ</small>
-      <p><a href="mailto:redwanhushen24@gmail.com">redwanhushen24@gmail.com</a></p>
-      <p>Copyright © 2024 Redwan's Method, All Rights Reserved.</p>
-  </div>
-</footer>
+  <footer class="footer-content"></footer>
+  <script type="text/javascript">
+    $('.footer-content').load('common/footer.html')
+  </script>
 
 <script>
-  // Ensure footer stays at the bottom
-  document.addEventListener("DOMContentLoaded", function() {
-      var footer = document.querySelector("footer");
-      if (window.innerHeight > document.body.offsetHeight) {
-          footer.style.position = "absolute";
-          footer.style.bottom = "0";
-          footer.style.width = "100%";
-      }
-  });
 
 // script start for exam schedul on main page
         const sheetIDSchedule = '1NLpaHHSWiwKmszSWX-Ivxxq2MOBS921VwljoRfuThSw';

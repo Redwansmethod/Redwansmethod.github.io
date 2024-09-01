@@ -33,19 +33,6 @@ body {
     min-height: 100vh;
     margin: 0;
 }
-/*Footer*/
-.footer{margin-top: auto;}
-footer {
-    background-color: #fcfcfc;
-    border-top: 1px solid #ddd;
-    text-align: center;
-    padding: 20px 10px;
-    margin-top: auto;} /*using footer div place on 100px down from top*/
-.footer-content a{text-decoration: none; color: #000;}
-.footer-content{font-size: 13px; font-family: "Poppins"; color: #000;}
-.footer-content small {font-size: 16px; font-family: "Baloo Da 2"; color: #4900d1;
-    border-bottom: 1px solid black;}
-.footer-content p, .footer-content small {margin: 0.5em 0;}
 
 .header-left h2 {
     margin: 0;
@@ -237,11 +224,7 @@ nav a:hover {
     .notice-box{font-size: 16px;}
     .routine-box table, .routine-box td, .routine-box th {font-size: 8px;}
     #scheduleTable table, #scheduleTable td, #scheduleTable th {font-size: 8px;}
-    footer {
-        padding: 0.5em 0;
-    }
     nav a:active{background-color: #00103d;}
-    .footer-content{font-size: 10px;} .footer-content small{font-size: 14px;}
     .again{width: 30%; scale: 1;}
 }
 
