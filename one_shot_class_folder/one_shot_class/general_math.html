@@ -11,15 +11,27 @@
 <script src="/JS/oneshot.js"></script>
 <script src="/secret.js"></script>
 <script> const sheetName = 'general-math';</script> <!--Subject Sheet Name-->
+<style>
+    /* Basic CSS to initially hide content */
+    #content {
+        display: none;
+    }
+</style>
 </head>
 <body>
+<!-- Preloader -->
+<div id="preloader"></div>
+
+<!-- Main Content -->
+<div id="content">
     <!-- Back button -->
-<button class="back-button" onclick="goBack()">←</button>
+    <button class="back-button" onclick="goBack()">←</button>
     <div class="header">
         <h1>General Math</h1>
     </div>
     <div class="container" id="box-container">
         <!-- Boxes will be dynamically generated here -->
     </div>
+</div>
 </body>
 </html>

@@ -1,7 +1,8 @@
-//Back Button
+// Back Button
 function goBack() {
     window.history.back();
 }
+
 // Function to toggle box content visibility
 function toggleBoxContent(boxNumber) {
     var boxContent = document.getElementById('box' + boxNumber + '-content');
@@ -17,7 +18,7 @@ function toggleBoxContent(boxNumber) {
 
 // Fetch data from the Google Sheet
 async function fetchSheetData() {
-    // const sheet name get from html
+    // Use the sheet name defined in the HTML file
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${academicSheetID}/values/${sheetName}?key=${API_KEY}`; // Replace with your API key
 
     try {
@@ -81,4 +82,23 @@ function updatePageContent(data) {
 }
 
 // Initialize the page with sheet data
-document.addEventListener('DOMContentLoaded', fetchSheetData);
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        // Load preloader content
+        const preloaderResponse = await fetch('/common/preloader.html');
+        const preloaderHTML = await preloaderResponse.text();
+        document.getElementById('preloader').innerHTML = preloaderHTML;
+
+        // Simulate content load (replace with actual content fetching logic)
+        await fetchSheetData(); // Fetch and load Google Sheet data
+
+        // Hide preloader and show main content
+        document.getElementById('preloader').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('preloader').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        }, 1500); // Match this delay with the transition duration
+    } catch (error) {
+        console.error('Error loading content:', error);
+    }
+});

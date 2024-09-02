@@ -10,7 +10,8 @@
     <script src="/JS/disable.js"></script>
     <script src="/JS/academic.js"></script>
     <script src="/secret.js"></script>
-    <script> const sheetName = 'chemistry';</script> <!--Subject Sheet Name-->
+    <script src="/JS/chemistry.js"></script> <!-- Link to the new JavaScript file -->
+    <script> const sheetName = 'Chemistry';</script> <!-- Subject Sheet Name -->
     <style>
         /* Basic CSS to initially hide content */
         #content {
@@ -33,38 +34,5 @@
             <!-- Boxes will be dynamically generated here -->
         </div>
     </div>
-
-    <!-- JavaScript for loading content -->
-    <script>
-        document.addEventListener('DOMContentLoaded', async function() {
-            try {
-                // Load preloader content
-                const preloaderResponse = await fetch('/common/preloader.html');
-                const preloaderHTML = await preloaderResponse.text();
-                document.getElementById('preloader').innerHTML = preloaderHTML;
-
-                // Load the rest of the page content
-                // Example for dynamically adding content to box-container
-                // You can adjust this part based on how you fetch and display your content
-
-                // Simulate content load
-                // You should replace this with your actual content fetching logic
-                await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate delay
-
-                // Hide preloader and show main content
-                document.getElementById('preloader').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('preloader').style.display = 'none';
-                    document.getElementById('content').style.display = 'block';
-                }, 500); // Match this delay with the transition duration
-            } catch (error) {
-                console.error('Error loading content:', error);
-            }
-        });
-
-        function goBack() {
-            window.history.back();
-        }
-    </script>
 </body>
 </html>
