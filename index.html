@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,11 +8,55 @@
   <link rel="icon" type="image/x-icon" href="/Assets/favicon.png">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="/JS/disable.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Notice fetching from Google Sheets  
+      var noticeSheetID = '1hHs5pt0iXwzfR1PYkvMUdBLURwlQnt_RMmVjI1yUYkM'; // Replace with your Google Sheet ID for notices
+      var noticeApiKey = 'AIzaSyBWkvsUZPm-t1KM8xWgrVyhwK09pS6jPpc'; // Replace with your Google Sheets API key for notices
+      var noticeUrl = `https://sheets.googleapis.com/v4/spreadsheets/${noticeSheetID}/values/A:A?key=${noticeApiKey}`;
+
+      $.getJSON(noticeUrl, function(data) {
+        var notices = '';
+        var rows = data.values;
+        for (var i = 0; i < rows.length; i++) {
+          notices += '<p>' + rows[i][0] + '</p>';
+        }
+        $('#notice-content').html(notices);
+      });
+
+      // Routine fetching from Google Sheets  
+      var routineSheetID = '1PO6MMMwQD436CLfCwazuyyrdV3pkmJh5yqO5lU8s7hk'; // Replace with your Google Sheet ID for routine
+      var routineApiKey = 'AIzaSyBWkvsUZPm-t1KM8xWgrVyhwK09pS6jPpc'; // Replace with your Google Sheets API key for routine
+      var routineUrl = `https://sheets.googleapis.com/v4/spreadsheets/${routineSheetID}/values/Sheet1?key=${routineApiKey}`;
+
+      $.getJSON(routineUrl, function(data) {
+        var table = '<table>';
+        var rows = data.values;
+        for (var i = 0; i < rows.length; i++) {
+          table += '<tr>';
+          for (var j = 0; j < rows[i].length; j++) {
+            table += '<td>' + rows[i][j] + '</td>';
+          }
+          table += '</tr>';
+        }
+        table += '</table>';
+        $('#routine-table').html(table);
+        highlightToday();
+      });
+
+      function highlightToday() {
+        var today = new Date().toLocaleString('en-us', { weekday: 'long' });
+        $('td').filter(function() {
+          return $(this).text() === today;
+        }).css('background-color', '#75caff');
+      }
+    });
+  </script>
 </head>
 <body>
   <header>
     <div class="header-left">
-      <h2><a href=""><img class="again" src="/Assets/logo_home.png"></a></h2>
+      <h2><a href=""><img class="again" src="/Assets/logo_home.png"></a></img></h2>
     </div>
     <div class="header-right">
       <nav>
@@ -23,6 +66,7 @@
           <li><a href="/all_courses/all_courses.html">Courses</a></li>
           <li><a href="/academic_class_folder/academic_class.html">Basic to Pro Course</a></li>
           <li><a href="/one_shot_class_folder/one_shot_class.html">One Shot Class</a></li>
+          <!--<li><a href="/exam_folder/exam.html">Exam</a></li>-->
           <li><a href="result_folder/result.html">Result</a></li>
           <li><a href="/members/members.html">Team Members</a></li>
         </ul>
@@ -40,71 +84,104 @@
         <div id="routine-table"></div>
       </div>
     </div>
+    <!--<div class="table-container"> 
+      <h3>📝 Exam Schedule</h3>
+      <table id="scheduleTable">
+          <thead>
+              <tr>
+                  <th>Subject</th>
+                  <th>Exam No</th>
+                  <th>Chapter No</th>
+                  <th>Date</th>
+                  <th>Exam Link</th>
+              </tr>
+          </thead>
+          <tbody>
+              comment-- Data will be inserted here --
+          </tbody>
+      </table>
+    </div>-->
   </div>
 
-  <!--Footer + preloader-->
+  <script>
+    function toggleMenu() {
+      var menu = document.getElementById('menu');
+      if (menu.style.transform === 'translateX(0%)') {
+        menu.style.transform = 'translateX(100%)';
+      } else {
+        menu.style.transform = 'translateX(0%)';
+      }
+    }
+
+    function handleClickOutsideMenu(event) {
+      var menu = document.getElementById('menu');
+      var menuIcon = document.getElementById('menu-icon');
+      if (!menu.contains(event.target) && !menuIcon.contains(event.target)) {
+        menu.style.transform = 'translateX(100%)';
+      }
+    }
+
+    function updateMenuEventListeners() {
+      if (window.innerWidth <= 768) {
+        document.addEventListener('click', handleClickOutsideMenu);
+      } else {
+        document.removeEventListener('click', handleClickOutsideMenu);
+        var menu = document.getElementById('menu');
+        menu.style.transform = 'translateX(0%)';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', updateMenuEventListeners);
+    window.addEventListener('resize', updateMenuEventListeners);
+  </script>
+  
+<!--Footer + preloader-->
   <div class="preloader"></div>
   <footer class="footer-content"></footer>
   <script type="text/javascript">
-    $('.footer-content').load('common/footer.html');
-    $('.preloader').load('common/preloader.html', function() {
-      // Move the logic to hide the preloader here after all data fetching is done
-      $(document).ready(function() {
-        // Fetch notices
-        var noticeSheetID = '1hHs5pt0iXwzfR1PYkvMUdBLURwlQnt_RMmVjI1yUYkM';
-        var noticeApiKey = 'AIzaSyBWkvsUZPm-t1KM8xWgrVyhwK09pS6jPpc';
-        var noticeUrl = `https://sheets.googleapis.com/v4/spreadsheets/${noticeSheetID}/values/A:A?key=${noticeApiKey}`;
-
-        $.getJSON(noticeUrl, function(data) {
-          var notices = '';
-          var rows = data.values;
-          for (var i = 0; i < rows.length; i++) {
-            notices += '<p>' + rows[i][0] + '</p>';
-          }
-          $('#notice-content').html(notices);
-        }).done(function() {
-          checkAllContentLoaded();
-        });
-
-        // Fetch routine
-        var routineSheetID = '1PO6MMMwQD436CLfCwazuyyrdV3pkmJh5yqO5lU8s7hk';
-        var routineApiKey = 'AIzaSyBWkvsUZPm-t1KM8xWgrVyhwK09pS6jPpc';
-        var routineUrl = `https://sheets.googleapis.com/v4/spreadsheets/${routineSheetID}/values/Sheet1?key=${routineApiKey}`;
-
-        $.getJSON(routineUrl, function(data) {
-          var table = '<table>';
-          var rows = data.values;
-          for (var i = 0; i < rows.length; i++) {
-            table += '<tr>';
-            for (var j = 0; j < rows[i].length; j++) {
-              table += '<td>' + rows[i][j] + '</td>';
-            }
-            table += '</tr>';
-          }
-          table += '</table>';
-          $('#routine-table').html(table);
-          highlightToday();
-        }).done(function() {
-          checkAllContentLoaded();
-        });
-
-        function highlightToday() {
-          var today = new Date().toLocaleString('en-us', { weekday: 'long' });
-          $('td').filter(function() {
-            return $(this).text() === today;
-          }).css('background-color', '#75caff');
-        }
-
-        // Function to check if all content is loaded
-        function checkAllContentLoaded() {
-          if ($('#notice-content').html() !== '' && $('#routine-table').html() !== '') {
-            $('.preloader').fadeOut(500, function() {
-              $(this).remove(); // Remove preloader after fadeout
-            });
-          }
-        }
-      });
-    });
+    $('.footer-content').load('common/footer.html')
+    $('.preloader').load('common/preloader.html')
   </script>
+
+<script>
+
+// script start for exam schedul on main page
+        const sheetIDSchedule = '1NLpaHHSWiwKmszSWX-Ivxxq2MOBS921VwljoRfuThSw';
+        const apiKeySchedule = 'AIzaSyBooe-Fdm9nJRv1buEzPA8ayyRPPXtPQbs'; // Replace with your API key
+        const sheetNameSchedule = 'Sheet1'; // Assuming the sheet name is 'Sheet1'
+
+        const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetIDSchedule}/values/${sheetNameSchedule}?key=${apiKeySchedule}`;
+
+        $.getJSON(url, function(data) {
+            const rows = data.values;
+            
+            // Get today's date and format it as DD-MM-YYYY
+            const today = new Date();
+            const todayFormatted = today.toLocaleDateString('en-GB').split('/').reverse().join('-');
+
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                const date = row[3]; // Date is in the 4th column (D)
+                let highlightClass = '';
+
+                if (date === todayFormatted) {
+                    highlightClass = 'highlight_exam';
+                }
+
+                // Check if Exam Link is not 'none' and create a hyperlink
+                const examLink = row[4] !== 'none' ? `<a href="${row[4]}" target="_blank">Exam Link</a>` : 'none';
+
+                $('#scheduleTable tbody').append(
+                    `<tr class="${highlightClass}">
+                        <td>${row[0]}</td>
+                        <td>${row[1]}</td>
+                        <td>${row[2]}</td>
+                        <td>${row[3]}</td>
+                        <td>${examLink}</td>
+                    </tr>`
+                );
+            }
+        });
+</script>
 </body>
 </html>
