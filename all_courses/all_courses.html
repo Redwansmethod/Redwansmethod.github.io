@@ -97,6 +97,12 @@
             });
             $('.preloader').load('/common/preloader.html');
         });
+
+        function hidePreloader() {
+            $('.preloader').fadeOut('slow', function() {
+                $(this).remove();
+            });
+        }
     </script>
 </body>
 </html>
