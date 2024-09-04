@@ -1,221 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Physics</title>
-<!-- Font -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400..800&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
-<style>
-    body {
-        font-family: 'Poppins', sans-serif;
-        margin: 0;
-        padding: 0;
-    }
-    .header {
-        background-color: #333;
-        color: white;
-        padding: 10px 0;
-        text-align: center;
-    }
-    .container {
-        padding: 20px;
-    }
-    .box {
-        background: #e0e0e0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        margin-bottom: 10px;
-        padding: 10px;
-        cursor: pointer;
-        position: relative;
-    }
-    .box-title {
-        font-weight: 500;
-        font-size: 1.2em;
-    }
-    .box-content {
-        display: none;
-    }
-    .box-content ol {
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-    }
-    .box-content li {
-        margin: 5px 0;
-    }
-    .box-content a {
-        text-decoration: none;
-        color: #007bff;
-    }
-    .box-content a:hover {
-        text-decoration: underline;
-    }
-    .icon {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        transition: transform 0.3s;
-    }
-    .icon.expanded {
-        transform: rotate(180deg);
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .box {
+            background-color: #fff;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .box-header {
+            padding: 15px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .box-content {
+            display: none;
+            padding: 15px;
+        }
+        .icon {
+            font-size: 18px;
+        }
+        .expanded {
+            transform: rotate(90deg);
+        }
+        .video-button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .video-button:hover {
+            background-color: #218838;
+        }
+    </style>
+    <script src="https://apis.google.com/js/api.js"></script>
 </head>
 <body>
     <div class="header">
         <h1>Physics</h1>
     </div>
-    <div class="container" id="box-container">
-        <!-- Boxes will be dynamically generated here -->
+    <div class="content">
+        <div class="box">
+            <div class="box-header" onclick="toggleBoxContent(1)">
+                Chapter 1: Introduction to Physics
+                <span class="icon">></span>
+            </div>
+            <div class="box-content" id="box1-content">
+                <button class="video-button" onclick="openVideo('https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview')">Watch Video</button>
+            </div>
+        </div>
+        <!-- Repeat similar blocks for additional chapters -->
     </div>
-    <script src="https://apis.google.com/js/api.js"></script>
+
     <script>
-        // Load the Google API client library
-        function loadClient() {
-            gapi.load('client:auth2', initClient);
-        }
-
-        // Initialize the Google API client with your credentials
-        function initClient() {
-            gapi.client.init({
-                apiKey: 'AIzaSyA5ZZin0ivR6N5TTeExQGk8dD_LVTghg6g', // Replace with your API key
-                clientId: '729381645292-u7gqt0emuh64r3bc2m1tvbo8pguteucm.apps.googleusercontent.com', // Replace with your client ID
-                discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/drive/v3/rest'],
-                scope: 'https://www.googleapis.com/auth/drive.readonly'
-            }).then(function () {
-                // Check if the user is signed in
-                gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-                updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-            }, function(error) {
-                console.error('Error initializing Google API client:', error);
-            });
-        }
-
-        // Update UI when the user signs in or out
-        function updateSigninStatus(isSignedIn) {
-            if (isSignedIn) {
-                const user = gapi.auth2.getAuthInstance().currentUser.get();
-                const email = user.getBasicProfile().getEmail();
-                console.log('Signed in as:', email);
-                fetchSheetData(email);
-            } else {
-                gapi.auth2.getAuthInstance().signIn();
-            }
-        }
-
-        // Function to toggle box content visibility
-        function toggleBoxContent(boxNumber) {
-            var boxContent = document.getElementById('box' + boxNumber + '-content');
-            var icon = document.querySelector('.box:nth-of-type(' + boxNumber + ') .icon');
-            if (boxContent.style.display === 'none' || boxContent.style.display === '') {
-                boxContent.style.display = 'block';
-                icon.classList.add('expanded');
-            } else {
-                boxContent.style.display = 'none';
-                icon.classList.remove('expanded');
-            }
-        }
-
-        // Fetch data from the Google Sheet
-        async function fetchSheetData(email) {
-            const sheetId = '1UH9j_332yT0M4BtmySqQuvJmqfJIf2b54iwuShL7dtk'; // Replace with your Google Sheet ID
-            const sheetName = 'Physics'; // Replace with your sheet name if different
-            const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=YOUR_API_KEY`; // Replace with your API key
-
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                updatePageContent(data.values, email);
-            } catch (error) {
-                console.error('Error fetching sheet data:', error);
-            }
-        }
-
-        // Update the page content based on the fetched data and user email
-        function updatePageContent(data, email) {
-            const container = document.getElementById('box-container');
-
-            // Group data by chapters
-            const chapters = data.reduce((acc, row) => {
-                const [chapter, className, classLink] = row;
-                if (!acc[chapter]) {
-                    acc[chapter] = [];
-                }
-                acc[chapter].push({ className, classLink });
-                return acc;
-            }, {});
-
-            // Create HTML elements for each chapter and class
-            Object.keys(chapters).forEach((chapter, index) => {
-                const chapterBox = document.createElement('div');
-                chapterBox.className = 'box';
-                chapterBox.onclick = () => toggleBoxContent(index + 1);
-                
-                const boxTitle = document.createElement('div');
-                boxTitle.className = 'box-title';
-                boxTitle.textContent = chapter;
-                
-                const boxContent = document.createElement('div');
-                boxContent.className = 'box-content';
-                boxContent.id = `box${index + 1}-content`;
-
-                const classList = document.createElement('ol');
-                chapters[chapter].forEach(({ className, classLink }) => {
-                    const listItem = document.createElement('li');
-                    const link = document.createElement('a');
-                    link.href = '#'; // Prevent default link behavior
-                    link.onclick = (event) => {
-                        event.preventDefault();
-                        checkVideoAccess(classLink, email);
-                    };
-                    link.textContent = className;
-                    listItem.appendChild(link);
-                    classList.appendChild(listItem);
-                });
-
-                boxContent.appendChild(classList);
-                chapterBox.appendChild(boxTitle);
-                chapterBox.appendChild(boxContent);
-
-                const icon = document.createElement('i');
-                icon.className = 'icon';
-                chapterBox.appendChild(icon);
-
-                container.appendChild(chapterBox);
-            });
-        }
-
-        // Function to check if the user has access to the video
-        function checkVideoAccess(videoUrl, email) {
-            gapi.client.drive.permissions.list({
-                fileId: getDriveFileIdFromUrl(videoUrl),
-                fields: 'permissions(emailAddress, role)'
-            }).then(function(response) {
-                const permissions = response.result.permissions;
-                const hasAccess = permissions.some(permission => permission.emailAddress === email && permission.role !== 'reader');
-
-                if (hasAccess) {
-                    openVideo(videoUrl);
-                } else {
-                    alert('You do not have permission to view this video.');
-                }
-            }, function(error) {
-                console.error('Error checking video access:', error);
-            });
-        }
-
-        // Function to extract the file ID from a Google Drive URL
-        function getDriveFileIdFromUrl(url) {
-            const regex = /\/file\/d\/(.*?)(\/|$)/;
-            const match = url.match(regex);
-            return match ? match[1] : null;
-        }
-
-        // Function to open video in a new window
         function openVideo(videoUrl) {
             const newWindow = window.open('', '', 'width=800,height=450');
             newWindow.document.write(`
@@ -259,10 +124,32 @@
                 </body>
                 </html>
             `);
+            newWindow.document.close();
+        }
+
+        function toggleBoxContent(boxNumber) {
+            var boxContent = document.getElementById('box' + boxNumber + '-content');
+            var icon = document.querySelector('.box:nth-of-type(' + boxNumber + ') .icon');
+            if (boxContent.style.display === 'none' || boxContent.style.display === '') {
+                boxContent.style.display = 'block';
+                icon.classList.add('expanded');
+            } else {
+                boxContent.style.display = 'none';
+                icon.classList.remove('expanded');
+            }
         }
 
         // Load the client library on page load
-        window.onload = loadClient;
+        function loadClient() {
+            gapi.client.setApiKey('AIzaSyCofDkWz-zz84N0QE0keNCvzTBmg3tcL3U');
+            return gapi.client.load('https://www.googleapis.com/discovery/v1/apis/drive/v3/rest')
+                .then(function() {
+                    console.log('GAPI client loaded for API');
+                }, function(error) {
+                    console.error('Error loading GAPI client for API', error);
+                });
+        }
+        gapi.load('client', loadClient);
     </script>
 </body>
 </html>
