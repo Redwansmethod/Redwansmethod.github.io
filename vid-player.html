@@ -1,132 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Physics</title>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-        .header {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-        }
-        .content {
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .box {
-            background-color: #fff;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        .box-header {
-            padding: 15px;
-            background-color: #007BFF;
-            color: white;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .box-content {
-            display: none;
-            padding: 15px;
-        }
-        .icon {
-            font-size: 18px;
-        }
-        .expanded {
-            transform: rotate(90deg);
-        }
-        .video-button {
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .video-button:hover {
-            background-color: #218838;
-        }
-    </style>
-    <script src="https://apis.google.com/js/api.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physics</title>
+<!--Font-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400..800&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+<link rel="icon" type="x-icon" href="/source/favicons/favicon.png">
+<link rel="stylesheet" href="/source/academic_oneshot_exam_style/all.css">
 </head>
 <body>
     <div class="header">
         <h1>Physics</h1>
     </div>
-    <div class="content">
-        <div class="box">
-            <div class="box-header" onclick="toggleBoxContent(1)">
-                Chapter 1: Introduction to Physics
-                <span class="icon">></span>
-            </div>
-            <div class="box-content" id="box1-content">
-                <button class="video-button" onclick="openVideo('https://drive.google.com/file/d/YOUR_VIDEO_ID_HERE/preview')">Watch Video</button>
-            </div>
-        </div>
-        <!-- Repeat similar blocks for additional chapters -->
+    <div class="container" id="box-container">
+        <!-- Boxes will be dynamically generated here -->
     </div>
-
+    
     <script>
-        function openVideo(videoUrl) {
-            const newWindow = window.open('', '', 'width=800,height=450');
-            newWindow.document.write(`
-                <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Embedded Video</title>
-                    <style>
-                        body {
-                            font-family: 'Poppins', sans-serif;
-                            background-color: #f5f5f5;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            height: 100vh;
-                            margin: 0;
-                        }
-                        .video-container {
-                            position: relative;
-                            width: 80%;
-                            max-width: 800px;
-                            height: 0;
-                            padding-bottom: 56.25%;
-                        }
-                        iframe {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 100%;
-                            border: none;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="video-container">
-                        <iframe src="${videoUrl}" allowfullscreen></iframe>
-                    </div>
-                </body>
-                </html>
-            `);
-            newWindow.document.close();
-        }
-
+        // Function to toggle box content visibility
         function toggleBoxContent(boxNumber) {
             var boxContent = document.getElementById('box' + boxNumber + '-content');
             var icon = document.querySelector('.box:nth-of-type(' + boxNumber + ') .icon');
@@ -139,17 +33,74 @@
             }
         }
 
-        // Load the client library on page load
-        function loadClient() {
-            gapi.client.setApiKey('AIzaSyCofDkWz-zz84N0QE0keNCvzTBmg3tcL3U');
-            return gapi.client.load('https://www.googleapis.com/discovery/v1/apis/drive/v3/rest')
-                .then(function() {
-                    console.log('GAPI client loaded for API');
-                }, function(error) {
-                    console.error('Error loading GAPI client for API', error);
-                });
+        // Fetch data from the Google Sheet
+        async function fetchSheetData() {
+            const sheetId = '1UH9j_332yT0M4BtmySqQuvJmqfJIf2b54iwuShL7dtk'; // Replace with your Google Sheet ID
+            const sheetName = 'Physics'; // Replace with your sheet name if different
+            const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${sheetName}?key=AIzaSyBWkvsUZPm-t1KM8xWgrVyhwK09pS6jPpc`; // Replace with your API key
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                updatePageContent(data.values);
+            } catch (error) {
+                console.error('Error fetching sheet data:', error);
+            }
         }
-        gapi.load('client', loadClient);
+
+        // Update the page content based on the fetched data
+        function updatePageContent(data) {
+            const container = document.getElementById('box-container');
+
+            // Group data by chapters
+            const chapters = data.reduce((acc, row) => {
+                const [chapter, className, classLink] = row;
+                if (!acc[chapter]) {
+                    acc[chapter] = [];
+                }
+                acc[chapter].push({ className, classLink });
+                return acc;
+            }, {});
+
+            // Create HTML elements for each chapter and class
+            Object.keys(chapters).forEach((chapter, index) => {
+                const chapterBox = document.createElement('div');
+                chapterBox.className = 'box';
+                chapterBox.onclick = () => toggleBoxContent(index + 1);
+                
+                const boxTitle = document.createElement('div');
+                boxTitle.className = 'box-title';
+                boxTitle.textContent = chapter;
+                
+                const boxContent = document.createElement('div');
+                boxContent.className = 'box-content';
+                boxContent.id = `box${index + 1}-content`;
+
+                const classList = document.createElement('ol');
+                chapters[chapter].forEach(({ className, classLink }) => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = classLink;
+                    link.target = '_blank';
+                    link.textContent = className;
+                    listItem.appendChild(link);
+                    classList.appendChild(listItem);
+                });
+
+                boxContent.appendChild(classList);
+                chapterBox.appendChild(boxTitle);
+                chapterBox.appendChild(boxContent);
+
+                const icon = document.createElement('i');
+                icon.className = 'icon';
+                chapterBox.appendChild(icon);
+
+                container.appendChild(chapterBox);
+            });
+        }
+
+        // Initialize the page with sheet data
+        document.addEventListener('DOMContentLoaded', fetchSheetData);
     </script>
 </body>
 </html>

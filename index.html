@@ -25,10 +25,13 @@
           <li><a href="/one_shot_class_folder/one_shot_class.html">One Shot Class</a></li>
           <li><a href="result_folder/result.html">Result</a></li>
           <li><a href="/members/members.html">Team Members</a></li>
+          <li class="login-btn"><a href="/login_db/login.html">Login</a></li>
+          <li class="you-btn"><a href="/login_db/you.html">You</a></li>
         </ul>
       </nav>
     </div>
   </header>
+  
   <div class="container">
     <div class="content">
       <div class="notice-box">
@@ -40,15 +43,33 @@
         <div id="routine-table"></div>
       </div>
     </div>
+    <div class="table-container"> 
+      <h3>📝 Exam Schedule</h3>
+      <table id="scheduleTable">
+          <thead>
+              <tr>
+                  <th>Subject</th>
+                  <th>Exam No</th>
+                  <th>Chapter No</th>
+                  <th>Date</th>
+                  <th>Exam Link</th>
+              </tr>
+          </thead>
+          <tbody>
+              <!-- Data will be inserted here -->
+          </tbody>
+      </table>
+    </div>
   </div>
-
-  <!--Footer + preloader-->
+  
+  <!-- Footer and Preloader -->
   <div class="preloader"></div>
   <footer class="footer-content"></footer>
+  
   <script type="text/javascript">
     $('.footer-content').load('common/footer.html');
     $('.preloader').load('common/preloader.html', function() {
-      // Move the logic to hide the preloader here after all data fetching is done
+      // Logic to hide the preloader after all content is loaded
       $(document).ready(function() {
         // Fetch notices
         var noticeSheetID = '1hHs5pt0iXwzfR1PYkvMUdBLURwlQnt_RMmVjI1yUYkM';
@@ -98,17 +119,53 @@
         // Function to check if all content is loaded
         function checkAllContentLoaded() {
           if ($('#notice-content').html() !== '' && $('#routine-table').html() !== '') {
-            $('.preloader').fadeOut(500, function() {
+            $('.preloader').fadeOut(2000, function() {
               $(this).remove(); // Remove preloader after fadeout
             });
           }
         }
       });
     });
-  </script>
-  
-<!--To add humberger on small screen-->
-  <script>
+
+    // Exam schedule logic
+    const sheetIDSchedule = '1NLpaHHSWiwKmszSWX-Ivxxq2MOBS921VwljoRfuThSw';
+    const apiKeySchedule = 'AIzaSyBooe-Fdm9nJRv1buEzPA8ayyRPPXtPQbs'; // Replace with your API key
+    const sheetNameSchedule = 'Sheet1'; // Assuming the sheet name is 'Sheet1'
+
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetIDSchedule}/values/${sheetNameSchedule}?key=${apiKeySchedule}`;
+
+    $.getJSON(url, function(data) {
+      const rows = data.values;
+      
+      // Get today's date and format it as DD-MM-YYYY
+      const today = new Date();
+      const todayFormatted = today.toLocaleDateString('en-GB').split('/').reverse().join('-');
+
+      for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        const date = row[3]; // Date is in the 4th column (D)
+        let highlightClass = '';
+
+        if (date === todayFormatted) {
+          highlightClass = 'highlight_exam';
+        }
+
+        // Check if Exam Link is not 'none' and create a hyperlink
+        const examLink = row[4] !== 'none' ? `<a href="${row[4]}" target="_blank">Exam Link</a>` : 'none';
+
+        $('#scheduleTable tbody').append(
+          `<tr class="${highlightClass}">
+            <td>${row[0]}</td>
+            <td>${row[1]}</td>
+            <td>${row[2]}</td>
+            <td>${row[3]}</td>
+            <td>${examLink}</td>
+          </tr>`
+        );
+      }
+    });
+
+    // Function for hamburger menu on small screens
     function toggleMenu() {
       var menu = document.getElementById('menu');
       if (menu.style.transform === 'translateX(0%)') {
@@ -139,5 +196,32 @@
     document.addEventListener('DOMContentLoaded', updateMenuEventListeners);
     window.addEventListener('resize', updateMenuEventListeners);
   </script>
+
+<!--NEW AT 09-07-24 -->
+    <!--SCRIPT FOR LOGIN CONDITION -- HIDE EXAM AND EXAM SCHEDULE-->
+    <script>
+      $(document).ready(function() {
+          // Check if user is logged in
+          var loggedIn = sessionStorage.getItem('loggedIn');
+          
+          if (loggedIn) {
+              // Hide the "Team Members" link if the user is logged in
+              $('.login-btn').hide();
+          }
+      });
+    </script>
+  
+    <!--SCRIPT FOR LOGOUT CONDITION -- HIDE EXAM AND EXAM SCHEDULE-->
+    <script>
+      $(document).ready(function() {
+        // Check if the user is logged in
+        if (sessionStorage.getItem('loggedIn') !== 'true') {
+          // Hide the schedule table if not logged in
+          $('.exam-btn').hide();
+          $('.you-btn').hide();
+          $('.table-container').hide();
+        }
+      });
+    </script>
 </body>
 </html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/CSS/login.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="input-group">
+                <label for="student-id">Student ID</label>
+                <input type="text" id="student-id" required placeholder="Enter Your Student ID">
+                </div>
+                <button type="submit">Login</button>
+                <p id="login-message"></p>
+            </form>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#login-form').submit(function(event) {
+                event.preventDefault();
+                var studentID = $('#student-id').val().trim();
+
+                if (!studentID) {
+                    $('#login-message').text('Please enter your Student ID.');
+                    return;
+                }
+
+                // Google Sheets information
+                var sheetID = '1FZJUxKtrno7qj7jdxjkmG3qONNN8JidjUSIBMIbKdEM';
+                var apiKey = 'AIzaSyBooe-Fdm9nJRv1buEzPA8ayyRPPXtPQbs';
+                var url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/I:I?key=${apiKey}`;
+
+                $.getJSON(url, function(data) {
+                    var studentIDs = data.values.flat();
+
+                    if (studentIDs.includes(studentID)) {
+                        // Store login status and student ID in sessionStorage
+                        sessionStorage.setItem('loggedIn', 'true');
+                        sessionStorage.setItem('studentID', studentID);
+                        $('#login-message').text('Login successful! Redirecting...');
+                        window.location.href = '/index.html';
+                    } else {
+                        $('#login-message').text('Invalid Student ID. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
