@@ -47,6 +47,7 @@ main {
 .box-higher-math {background-color: #ffaf40;}
 .box-physics {background-color: #4ab1ff;}
 .box-chemistry {background-color: #D6A2E8;}
+.box-biology {background-color: #94ec7a;}
 
 .box a {
     text-decoration: none; /* Remove underline from links */

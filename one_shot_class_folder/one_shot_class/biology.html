@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry</title>
+    <link rel="icon" type="image/x-icon" href="/Assets/favicon.png">
+    <link rel="stylesheet" href="/CSS/all.css">
+    <link rel="stylesheet" href="/CSS/back_button.css">
+    <script src="/JS/disable.js"></script>
+    <script src="/JS/oneshot.js"></script>
+    <script src="/secret.js"></script>
+    <script src="/JS/biology.js"></script> <!-- Link to the new JavaScript file -->
+    <script> const sheetName = 'biology';</script> <!-- Subject Sheet Name -->
+    <style>
+        /* Basic CSS to initially hide content */
+        #content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Main Content -->
+    <div id="content">
+        <!-- Back button -->
+        <button class="back-button" onclick="goBack()">←</button>
+        <div class="header">
+            <h1>Biology</h1>
+        </div>
+        <div class="container" id="box-container">
+            <!-- Boxes will be dynamically generated here -->
+        </div>
+    </div>
+</body>
+</html>
