@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Video</title>
+    <!-- Font -->
+    <link rel="icon" type="x-icon" href="/Assets/favicon.png">
+    <script src="/JS/disable.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@500&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 100%;
+        }
+        .video-container {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background: #000;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px; /* Approximate width of the pop-up button */
+            height: 40px; /* Approximate height of the pop-up button */
+            background: transparent;
+            z-index: 10;
+        }
+        #bottom-title {
+            text-align: left;
+            font-size: 20px;
+            margin-top: 16px;
+            font-family: "Anek Bangla", sans-serif;
+        }
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                max-width: 100%;
+            }
+            #bottom-title {
+                font-size: 18px;
+                text-align: center;
+            }
+        }
+        @media (max-width: 480px) {
+            .video-container {
+                padding-top: 75%; /* Adjust for a taller aspect ratio on small screens */
+            }
+            #bottom-title {
+                font-size: 16px;
+                margin-top: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="video-container">
+            <iframe id="video-frame" src="" allowfullscreen></iframe>
+            <div class="overlay"></div> <!-- Overlay element to block the pop-up button -->
+        </div>
+        <h2 id="bottom-title"></h2>
+    </div>
+
+    <script>
+        // Function to get URL parameters
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Function to extract file ID from Google Drive URL
+        function extractFileId(url) {
+            const match = url.match(/(?:\/d\/|id=)([a-zA-Z0-9-_]+)/);
+            return match ? match[1] : null;
+        }
+
+        // Function to fetch the video title from Google Drive
+        async function fetchVideoTitle(fileId) {
+            const apiKey = 'AIzaSyBWkvsUZPm-t1KM8xWgrVyhwK09pS6jPpc'; // Replace with your API key
+            const url = `https://www.googleapis.com/drive/v3/files/${fileId}?fields=name&key=${apiKey}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data && data.name) {
+                    const title = data.name;
+                    document.title = title;
+                    document.getElementById('bottom-title').textContent = title;
+                }
+            } catch (error) {
+                console.error('Error fetching video title:', error);
+            }
+        }
+
+        // Update iframe source and title based on the video query parameter
+        async function loadVideo() {
+            const videoUrl = getQueryParam('video');
+            if (videoUrl) {
+                const fileId = extractFileId(videoUrl);
+                const iframe = document.getElementById('video-frame');
+                iframe.src = `https://drive.google.com/file/d/${fileId}/preview`;
+
+                // Fetch and set the title
+                await fetchVideoTitle(fileId);
+            }
+        }
+
+        // Load the video when the page loads
+        document.addEventListener('DOMContentLoaded', loadVideo);
+    </script>
+</body>
+</html>
