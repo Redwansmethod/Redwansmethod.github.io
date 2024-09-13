@@ -46,7 +46,7 @@
                         // Store login status and student ID in sessionStorage
                         sessionStorage.setItem('loggedIn', 'true');
                         sessionStorage.setItem('studentID', studentID);
-                        $('#login-message').text('Login successful! Redirecting...');
+                        $('#login-message').text('Login successful! Redirecting...').css('color','#03AC13');
                         window.location.href = '/index.html';
                     } else {
                         $('#login-message').text('Invalid Student ID. Please try again.');
