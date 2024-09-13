@@ -9,7 +9,6 @@
   <link rel="icon" type="image/x-icon" href="/Assets/favicon.png">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="/JS/disable.js"></script>
-  <script src="/JS/session.js"></script>
 </head>
 <body>
   <header>
@@ -47,18 +46,18 @@
     <div class="table-container"> 
       <h3>📝 Exam Schedule</h3>
       <table id="scheduleTable">
-        <thead>
-          <tr>
-            <th>Subject</th>
-            <th>Exam No</th>
-            <th>Chapter No</th>
-            <th>Date</th>
-            <th>Exam Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Data will be inserted here -->
-        </tbody>
+          <thead>
+              <tr>
+                  <th>Subject</th>
+                  <th>Exam No</th>
+                  <th>Chapter No</th>
+                  <th>Date</th>
+                  <th>Exam Link</th>
+              </tr>
+          </thead>
+          <tbody>
+              <!-- Data will be inserted here -->
+          </tbody>
       </table>
     </div>
   </div>
@@ -70,6 +69,7 @@
   <script type="text/javascript">
     $('.footer-content').load('common/footer.html');
     $('.preloader').load('common/preloader.html', function() {
+      // Logic to hide the preloader after all content is loaded
       $(document).ready(function() {
         // Fetch notices
         var noticeSheetID = '1hHs5pt0iXwzfR1PYkvMUdBLURwlQnt_RMmVjI1yUYkM';
@@ -116,10 +116,11 @@
           }).css('background-color', '#75caff');
         }
 
+        // Function to check if all content is loaded
         function checkAllContentLoaded() {
           if ($('#notice-content').html() !== '' && $('#routine-table').html() !== '') {
             $('.preloader').fadeOut(2000, function() {
-              $(this).remove();
+              $(this).remove(); // Remove preloader after fadeout
             });
           }
         }
@@ -196,26 +197,33 @@
     window.addEventListener('resize', updateMenuEventListeners);
   </script>
 
-  <!--SCRIPT FOR LOGIN CONDITION -- HIDE EXAM AND EXAM SCHEDULE-->
-  <script>
-    $(document).ready(function() {
-      var loggedIn = sessionStorage.getItem('loggedIn');
-      
-      if (loggedIn) {
-        // Show the classes that were hidden
-        $('.exam-btn').show();
-        $('.you-btn').show();
-        $('.table-container').show();
-        $('.one_shot_class').show();
-        $('.login-btn').hide();
-      } else {
-        // Hide the classes if not logged in
-        $('.exam-btn').hide();
-        $('.you-btn').hide();
-        $('.table-container').hide();
-        $('.one_shot_class').hide();
-      }
-    });
-  </script>
+<!--NEW AT 09-07-24 -->
+    <!--SCRIPT FOR LOGIN CONDITION -- HIDE EXAM AND EXAM SCHEDULE-->
+    <script>
+      $(document).ready(function() {
+          // Check if user is logged in
+          var loggedIn = sessionStorage.getItem('loggedIn');
+          
+          if (loggedIn) {
+              // Hide the "Team Members" link if the user is logged in
+              $('.login-btn').hide();
+          }
+      });
+    </script>
+  
+    <!--SCRIPT FOR LOGOUT CONDITION -- HIDE EXAM AND EXAM SCHEDULE-->
+    <script>
+      $(document).ready(function() {
+        // Check if the user is logged in
+        if (sessionStorage.getItem('loggedIn') !== 'true') {
+          // Hide the schedule table if not logged in
+          $('.exam-btn').hide();
+          $('.you-btn').hide();
+          $('.table-container').hide();
+          $('.one_shot_class').hide();
+        }
+      });
+    </script>
+    <script></script>
 </body>
 </html>
