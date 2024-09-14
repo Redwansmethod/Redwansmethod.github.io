@@ -3,61 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Profile</title>
-    <link rel="stylesheet" href="/CSS/you.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="/CSS/login.css">
     <link rel="icon" type="x-icon" href="/Assets/favicon.png">
     <script src="/JS/disable.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <style>
-        /* Hide the content initially */
-        #content {
-            display: none;
-        }
-    </style>
 </head>
 <body>
-
-    <!-- Preloader -->
-    <div id="preloader"></div>
-
-    <!-- Main Content -->
-    <div id="content">
-        <section class="profile-container">
-            <h2>Your Profile</h2>
-            <div class="information">
-                <p><h3>Name:</h3> <span id="user-name"></span></p>
-                <p><h3>Gmail Address:</h3> <span id="user-email"></span></p>
-                <p><h3>Student ID:</h3> <span id="user-id"></span></p>
-                <p><h3>Phone Number:</h3> <span id="user-phone"></span></p>
-                <p><h3>Enrolled Course:</h3> <span id="user-enroll"></span></p>
-            </div>
-            <button id="logout-btn">Logout</button>
-        </section>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="input-group">
+                <label for="student-id">Student ID</label>
+                <input type="text" id="student-id" required placeholder="Enter Your Student ID">
+                </div>
+                <button type="submit">Login</button>
+                <p id="login-message"></p>
+            </form>
+        </div>
     </div>
-
     <script>
-        $(document).ready(async function() {
-            try {
-                // Load preloader content
-                const preloaderResponse = await fetch('/common/preloader.html');
-                const preloaderHTML = await preloaderResponse.text();
-                document.getElementById('preloader').innerHTML = preloaderHTML;
+        $(document).ready(function() {
+            $('#login-form').submit(function(event) {
+                event.preventDefault();
+                var studentID = $('#student-id').val().trim();
 
-                // Simulate content load
-                await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate delay
-
-                // Check if the user is logged in
-                if (sessionStorage.getItem('loggedIn') !== 'true') {
-                    alert('Please log in first.');
-                    window.location.href = 'login.html';
-                    return;
-                }
-
-                // Get the Student ID from session storage
-                var studentID = sessionStorage.getItem('studentID');
                 if (!studentID) {
-                    alert('No Student ID found. Please log in again.');
-                    window.location.href = 'login.html';
+                    $('#login-message').text('Please enter your Student ID.');
                     return;
                 }
 
@@ -68,43 +41,19 @@
 
                 $.getJSON(url, function(data) {
                     var studentIDs = data.values.flat();
-                    var rowIndex = studentIDs.indexOf(studentID) + 1; // Row index starts from 1
 
-                    if (rowIndex > 0) { // Valid row found
-                        var range = `A${rowIndex}:D${rowIndex}`;
-                        var detailsUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetID}/values/${range}?key=${apiKey}`;
-                        
-                        $.getJSON(detailsUrl, function(detailsData) {
-                            var userDetails = detailsData.values[0];
-                            $('#user-name').text(userDetails[2]);   // Your Name (C)
-                            $('#user-email').text(userDetails[1]);  // Gmail Address (B)
-                            $('#user-phone').text(userDetails[3]);  // Your Phone Number (D)
-                            $('#user-enroll').text(userDetails[0]); // Enrolled Course (A)
-                            $('#user-id').text(studentID);          // Student ID
-                            
-                            // Hide preloader and show content
-                            document.getElementById('preloader').style.opacity = '0';
-                            setTimeout(() => {
-                                document.getElementById('preloader').style.display = 'none';
-                                document.getElementById('content').style.display = 'block';
-                            }, 500); // Match this delay with the transition duration
-                        });
+                    if (studentIDs.includes(studentID)) {
+                        // Store login status and student ID in sessionStorage
+                        sessionStorage.setItem('loggedIn', 'true');
+                        sessionStorage.setItem('studentID', studentID);
+                        $('#login-message').text('Login successful! Redirecting...').css('color','#03AC13');
+                        window.location.href = '/index.html';
                     } else {
-                        alert('Student ID not found. Please log in again.');
-                        window.location.href = 'login.html';
+                        $('#login-message').text('Invalid Student ID. Please try again.');
                     }
                 });
-            } catch (error) {
-                console.error('Error loading content:', error);
-            }
-
-            // Logout functionality
-            $('#logout-btn').click(function() {
-                sessionStorage.removeItem('loggedIn');
-                sessionStorage.removeItem('studentID');
-                window.location.href = '/index.html'; // Redirect to home page after logout
             });
         });
     </script>
 </body>
-</html>
+</html> 
