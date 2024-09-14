@@ -4,9 +4,7 @@
   <title>Redwans Method</title>
   <meta charset="UTF-8">
   <meta name="description" content="Redwan's Method The method you dream for; 💥">
-  <meta name="keywords" content="Redwans Method,Redwans Method Website,redwan method,redwan hushen,redwan, 10 minute school,ACS, asg shop, redwans method youtube channel,
-  redwan hushen youtube channel,redwans method ssc, redwans method hsc, ssc 25 batch,ssc physics, ssc chemistry,
-  ssc higher math, ssc general math, hsc physics,FRPB-25, basic to pro course">
+  <meta name="keywords" content="Redwans Method,Redwans Method Website,redwan method,redwan hushen,redwan, 10 minute school,ACS, asg shop, redwans method youtube channel, redwan hushen youtube channel,redwans method ssc, redwans method hsc, ssc 25 batch,ssc physics, ssc chemistry, ssc higher math, ssc general math, hsc physics,FRPB-25, basic to pro course">
   <meta name="author" content="Minhaj Uddin">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/CSS/style.css">
@@ -74,7 +72,6 @@
   <script type="text/javascript">
     $('.footer-content').load('common/footer.html');
     $('.preloader').load('common/preloader.html', function() {
-      // Logic to hide the preloader after all content is loaded
       $(document).ready(function() {
         // Fetch notices
         var noticeSheetID = '1hHs5pt0iXwzfR1PYkvMUdBLURwlQnt_RMmVjI1yUYkM';
@@ -200,34 +197,33 @@
 
     document.addEventListener('DOMContentLoaded', updateMenuEventListeners);
     window.addEventListener('resize', updateMenuEventListeners);
-  </script>
 
-<!--NEW AT 09-07-24 -->
-    <!--SCRIPT FOR LOGIN CONDITION -- HIDE EXAM AND EXAM SCHEDULE-->
-    <script>
-      $(document).ready(function() {
-          // Check if user is logged in
-          var loggedIn = sessionStorage.getItem('loggedIn');
-          
-          if (loggedIn) {
-              // Hide the "Team Members" link if the user is logged in
-              $('.login-btn').hide();
-          }
-      });
-    </script>
-  
-    <!--SCRIPT FOR LOGOUT CONDITION -- HIDE EXAM AND EXAM SCHEDULE-->
-    <script>
-      $(document).ready(function() {
-        // Check if the user is logged in
-        if (sessionStorage.getItem('loggedIn') !== 'true') {
-          // Hide the schedule table if not logged in
-          $('.exam-btn').hide();
-          $('.you-btn').hide();
-          $('.table-container').hide();
-          $('.one_shot_class').hide();
-        }
-      });
-    </script>
+    // Cookie handling
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    $(document).ready(function() {
+      // Check if a valid studentID cookie exists
+      var studentID = getCookie('studentID');
+
+      if (studentID) {
+        // If studentID cookie exists, user is considered logged in
+        $('.login-btn').hide(); // Hide login button
+        $('.exam-btn').show();  // Show exam buttons
+        $('.you-btn').show();   // Show 'You' button
+        $('.table-container').show();  // Show exam schedule
+        $('.one_shot_class').show();  // Show one-shot class
+      } else {
+        // If no valid studentID cookie, hide restricted content
+        $('.exam-btn').hide();
+        $('.you-btn').hide();
+        $('.table-container').hide();
+        $('.one_shot_class').hide();
+      }
+    });
+  </script>
 </body>
 </html>
