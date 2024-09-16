@@ -1,4 +1,5 @@
-const API_KEY = 'AIzaSyBWkvsUZPm-t1KM8xWgrVyhwK09pS6jPpc';
+// const API_KEY = 'AIzaSyBWkvsUZPm-t1KM8xWgrVyhwK09pS6jPpc';
+const API_KEY = 'YOUR_API_KEY_PLACEHOLDER';  // This will be replaced with the GitHub secret during the build
 const academicSheetID = '1UH9j_332yT0M4BtmySqQuvJmqfJIf2b54iwuShL7dtk'
 const oneshotSheetID = '1eRcTTvRQLSZ0iRV2occU5FYoOZ2FOszOi3nuZddvIiU'; // now frpb 25 class sheet id
 const examSheetID = '1uowLk3nSTefCcwnq6fx4GDcM481mgWJJ6sWqeeS2los';
