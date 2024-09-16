@@ -12,6 +12,7 @@
   <link rel="icon" type="image/x-icon" href="/Assets/favicon.png">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="/JS/disable.js"></script>
+  <script src="secret.js"></script>
 </head>
 <body>
   <header>
@@ -74,9 +75,7 @@
     $('.preloader').load('common/preloader.html', function() {
       $(document).ready(function() {
         // Fetch notices
-        var noticeSheetID = '1hHs5pt0iXwzfR1PYkvMUdBLURwlQnt_RMmVjI1yUYkM';
-        var noticeApiKey = 'AIzaSyBWkvsUZPm-t1KM8xWgrVyhwK09pS6jPpc';
-        var noticeUrl = `https://sheets.googleapis.com/v4/spreadsheets/${noticeSheetID}/values/A:A?key=${noticeApiKey}`;
+        var noticeUrl = `https://sheets.googleapis.com/v4/spreadsheets/${noticeSheetID}/values/A:A?key=${API_KEY}`;
 
         $.getJSON(noticeUrl, function(data) {
           var notices = '';
@@ -90,9 +89,7 @@
         });
 
         // Fetch routine
-        var routineSheetID = '1PO6MMMwQD436CLfCwazuyyrdV3pkmJh5yqO5lU8s7hk';
-        var routineApiKey = 'AIzaSyBWkvsUZPm-t1KM8xWgrVyhwK09pS6jPpc';
-        var routineUrl = `https://sheets.googleapis.com/v4/spreadsheets/${routineSheetID}/values/Sheet1?key=${routineApiKey}`;
+        var routineUrl = `https://sheets.googleapis.com/v4/spreadsheets/${routineSheetID}/values/Sheet1?key=${API_KEY}`;
 
         $.getJSON(routineUrl, function(data) {
           var table = '<table>';
@@ -130,11 +127,8 @@
     });
 
     // Exam schedule logic
-    const sheetIDSchedule = '1NLpaHHSWiwKmszSWX-Ivxxq2MOBS921VwljoRfuThSw';
-    const apiKeySchedule = 'AIzaSyBooe-Fdm9nJRv1buEzPA8ayyRPPXtPQbs'; // Replace with your API key
     const sheetNameSchedule = 'Sheet1'; // Assuming the sheet name is 'Sheet1'
-
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetIDSchedule}/values/${sheetNameSchedule}?key=${apiKeySchedule}`;
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${scheduleSheetID}/values/${sheetNameSchedule}?key=${API_KEY}`;
 
     $.getJSON(url, function(data) {
       const rows = data.values;
