@@ -1,4 +1,4 @@
-/*Fonts*/
+/* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400&family=Poppins:wght@300;500&display=swap');
 
 * {
@@ -34,6 +34,7 @@ body {
 }
 
 .input-group {
+    position: relative;
     margin-bottom: 30px;
 }
 
@@ -52,10 +53,28 @@ body {
     font-size: 16px;
     outline: none;
     transition: border-color 0.3s ease;
+    padding-right: 40px;
 }
 
 .input-group input:focus {
     border-color: #007BFF;
+}
+
+.password-group .toggle-password {
+    position: absolute;
+    top: 36px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.password-group .toggle-password .eye-icon {
+    font-size: 18px;
+    color: #000000;
+    margin-top: 3px;
+}
+
+.password-group .toggle-password .eye-icon.show {
+    color: #007BFF;
 }
 
 button {
