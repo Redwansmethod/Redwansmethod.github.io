@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap');
         /* Hide the content initially */
         #content {
             display: none;
@@ -20,14 +20,17 @@
             scale: 1.2;
         }
 
-        .profile-container h2 {
-            font-size: 1rem;
-            font-weight: bold;
-            color: #0d3b66;
-            text-align: right;
+        .studentID{
             display: inline-block;
+            position: absolute;
+            top: 10px; /* Adjust value as needed */
+            right: 25px; /* Adjust value as needed */
+            z-index: 1000; /* Ensures it's on top */
+            border: 1px solid black;
+            font-size: 12px;
+            padding: 5px 8px;
+            border-radius: 20px;        
         }
-
         .information {
             margin-top: 20px;
         }
@@ -35,14 +38,10 @@
         .information p {
             margin: 10px 0;
             font-size: 1rem;
-            color: #333;
-            font-weight: normal;
+            color: #000000;
+            font-weight: 300;
         }
 
-        .information span {
-            font-weight: bold;
-            color: #0d3b66;
-        }
 
         .label {
             color: #0d3b66;
