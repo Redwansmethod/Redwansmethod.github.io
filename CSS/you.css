@@ -1,124 +1,120 @@
-/* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400&family=Poppins:wght@300;500&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+        /* Hide the content initially */
+        #content {
+            display: none;
+        }
+        *{
+            font-family: "Poppins";
+        }
+        /* Minimalist Student ID Card Styling */
+        .profile-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            scale: 1.2;
+        }
 
-body{
-    background-color: #fff;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-}
+        .profile-container h2 {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #0d3b66;
+            text-align: right;
+            display: inline-block;
+        }
 
-/* Profile Container */
-.profile-container{
-    width: 300%;
-    max-width: 600px;
-    padding: 20px;
-    position: relative;
-    border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 1.25rem; /* 20px */
-    transition: all 0.3s;
-    text-align: left;
-    scale: 1.2;
-}
+        .information {
+            margin-top: 20px;
+        }
 
-.profile-container h2{
-    margin: 20px 0;
-    border-bottom: 1px dashed #000;
-    letter-spacing: 1px;
-    text-align: center;
-}
+        .information p {
+            margin: 10px 0;
+            font-size: 1rem;
+            color: #333;
+            font-weight: normal;
+        }
 
-.profile-container h3,
-.profile-container span {
-    display: inline-block;
-    vertical-align: middle; /* Align them vertically */
-    margin: 0;
-}
+        .information span {
+            font-weight: bold;
+            color: #0d3b66;
+        }
 
-.profile-container h3 {
-    font-weight: 500;
-    color: #00103d;
-    margin-right: 5px; /* Add some space between h3 and span */
-}
+        .label {
+            color: #0d3b66;
+            font-weight: bold;
+        }
 
-.profile-container span {
-    font-weight: 300;
-    color: #555;
-}
+        #logout-btn {
+            margin-top: 10px;
+            padding: 10px 45%;
+            background-color: #0d3b66;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        #logout-btn:hover {
+            background-color: #145DA0;
+        }
 
-.information{
-    margin-top: 10px;
-}
+        /* Preloader styling */
+        #preloader {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.profile-container p{
-    padding: 4px 0;
-}
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .profile-container {
+                margin: 50px auto;
+                /* padding: 15px; */
+                /* margin: 20px auto; */
+                width: 90%;
+                scale: 1;
+            }
 
-.profile-container #logout-btn{
-    border: none;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 20px;
-}
+            .profile-container h2 {
+                font-size: 1.2rem;
+            }
 
-.profile-container #logout-btn:hover{
-    background-color: #0056b3;
-}
+            .information p {
+                font-size: 0.9rem;
+            }
 
-/* Media Queries */
-@media (min-width: 768px) and (max-width: 1024px) {
-    .profile-container {
-        font-size: 1.2rem; /* 18px */
-        padding: 18px;
-        scale: 1.4;
-        width: 100%;
-    }
-}
+            #logout-btn {
+                width: 100%;
+                font-size: 0.9rem;
+            }
+        }
 
-@media (min-width: 481px) and (max-width: 767px) {
-    .profile-container{
-        font-size: 1rem; /* 16px */
-        padding: 16px;
-        scale: 1;
-    }
-}
+        @media (min-width: 600px) and (max-width: 1024px) {
+            .profile-container {
+                margin: 50px auto;
+                width: 100%;
+                max-width: 400px;
+                scale: 1;
+            }
 
-@media (max-width: 480px) {
-    body {
-        padding: 10px;
-        height: auto; /* Allow body to adjust height based on content */
-    }
-    .profile-container{
-        width: 100%;
-        font-size: 0.875rem; /* 14px */
-        padding: 15px;
-        box-shadow: none; /* Reduce shadow on smaller screens */
-        border-radius: 10px;
-        scale: 1;
-    }
-    .profile-container h2 {
-        font-size: 1.5rem; /* 24px */
-        margin: 10px 0;
-    }
-    .profile-container #logout-btn {
-        width: 100%;
-        padding: 12px 0;
-        font-size: 1rem;
-    }
-}
+            .profile-container h2 {
+                font-size: 1.3rem;
+            }
+
+            .information p {
+                font-size: 1rem;
+            }
+
+            #logout-btn {
+                max-width: 400px;
+            }
+        }

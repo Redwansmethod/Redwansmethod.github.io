@@ -4,16 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Profile</title>
-    <link rel="stylesheet" href="/CSS/you.css">
     <link rel="icon" type="x-icon" href="/Assets/favicon.png">
     <script src="/JS/disable.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <style>
-        /* Hide the content initially */
-        #content {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="/CSS/you.css">
 </head>
 <body>
 
@@ -23,13 +17,14 @@
     <!-- Main Content -->
     <div id="content">
         <section class="profile-container">
-            <h2>Your Profile</h2>
+            <img src="/Assets/logo_home.png" alt="Logo" width="100">
+            <hr>
             <div class="information">
-                <p><h3>Name:</h3> <span id="user-name"></span></p>
-                <p><h3>Gmail Address:</h3> <span id="user-email"></span></p>
-                <p><h3>Student ID:</h3> <span id="user-id"></span></p>
-                <p><h3>Phone Number:</h3> <span id="user-phone"></span></p>
-                <p><h3>Enrolled Course:</h3> <span id="user-enroll"></span></p>
+                <p><span class="label">Name:</span> <span id="user-name"></span></p>
+                <p><span class="label">Student ID:</span> <span id="user-id"></span></p>
+                <p><span class="label">Phone Number:</span> <span id="user-phone"></span></p>
+                <p><span class="label">Gmail Address:</span> <span id="user-email"></span></p>
+                <p><span class="label">Enrolled Course:</span> <span id="user-enroll"></span></p>
             </div>
             <button id="logout-btn">Logout</button>
         </section>
