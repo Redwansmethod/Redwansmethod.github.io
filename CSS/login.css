@@ -125,6 +125,10 @@ button:hover {
         font-size: 15px;
     }
 
+    .password-group .toggle-password .eye-icon {
+        margin-top: -3px;
+    }
+
     #login-message {
         font-size: 12px;
     }
