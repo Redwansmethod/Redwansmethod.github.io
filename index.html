@@ -1,223 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Redwans Method</title>
-  <meta charset="UTF-8">
-  <meta name="description" content="Redwan's Method The method you dream for;">
-  <meta name="keywords" content="Redwans Method,Redwans Method Website,redwan method,redwan hushen,redwan, 10 minute school,ACS, asg shop, redwans method youtube channel, redwan hushen youtube channel,redwans method ssc, redwans method hsc, ssc 25 batch,ssc physics, ssc chemistry, ssc higher math, ssc general math, hsc physics,FRPB-25, basic to pro course">
-  <meta name="author" content="Minhaj Uddin">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/CSS/style.css">
-  <link rel="stylesheet" href="/css/scroll_bar.css">
-  <link rel="icon" type="image/x-icon" href="/Assets/favicon.png">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="/JS/disable.js"></script>
-  <script src="secret.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ridwan's Method</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+        }
+        .text a {
+            text-decoration: none;
+            font-size: 8vw; /* Scalable font size based on viewport width */
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            color: #000;
+        }
+
+        @media (max-width: 768px) {
+            .text a {
+                font-size: 12vw; /* Increase font size for smaller devices */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .text a {
+                font-size: 16vw; /* Further adjustment for very small screens */
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="header-left">
-      <h2><a href=""><img class="again" src="/Assets/logo_home.png"></a></h2>
+    <div class="text">
+        <a>Thank You!</a>
     </div>
-    <div class="header-right">
-      <nav>
-        <div class="menu-icon" id="menu-icon" onclick="toggleMenu()">&#9776;</div>
-        <ul id="menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="/all_courses/all_courses.html">Courses</a></li>
-          <li><a href="/academic_class_folder/academic_class.html">Basic to Pro Course</a></li>
-          <li class="one_shot_class"><a href="/one_shot_class_folder/one_shot_class.html">FRPB-25</a></li>
-          <li><a href="result_folder/result.html">Result</a></li>
-          <li><a href="/members/members.html">Team Members</a></li>
-          <li class="login-btn"><a href="/login_db/login.html">Login</a></li>
-          <li class="you-btn"><a href="/login_db/you.html">You</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  
-  <div class="container">
-    <div class="content">
-      <div class="notice-box">
-        <h3>📋Notice</h3>
-        <div id="notice-content"></div>
-      </div>
-      <div class="routine-box">
-        <h3>🗓️ Routine</h3>
-        <div id="routine-table"></div>
-      </div>
-    </div>
-    <div class="table-container"> 
-      <h3>📝 Exam Schedule</h3>
-      <table id="scheduleTable">
-          <thead>
-              <tr>
-                  <th>Subject</th>
-                  <th>Exam No</th>
-                  <th>Chapter No</th>
-                  <th>Date</th>
-                  <th>Exam Link</th>
-              </tr>
-          </thead>
-          <tbody>
-              <!-- Data will be inserted here -->
-          </tbody>
-      </table>
-    </div>
-  </div>
-  
-  <!-- Footer and Preloader -->
-  <div class="preloader"></div>
-  <footer class="footer-content"></footer>
-  
-  <script type="text/javascript">
-    $('.footer-content').load('common/footer.html');
-    $('.preloader').load('common/preloader.html', function() {
-      $(document).ready(function() {
-        // Fetch notices
-        var noticeUrl = `https://sheets.googleapis.com/v4/spreadsheets/${noticeSheetID}/values/A:A?key=${API_KEY}`;
-
-        $.getJSON(noticeUrl, function(data) {
-          var notices = '';
-          var rows = data.values;
-          for (var i = 0; i < rows.length; i++) {
-            notices += '<p>' + rows[i][0] + '</p>';
-          }
-          $('#notice-content').html(notices);
-        }).done(function() {
-          checkAllContentLoaded();
-        });
-
-        // Fetch routine
-        var routineUrl = `https://sheets.googleapis.com/v4/spreadsheets/${routineSheetID}/values/Sheet1?key=${API_KEY}`;
-
-        $.getJSON(routineUrl, function(data) {
-          var table = '<table>';
-          var rows = data.values;
-          for (var i = 0; i < rows.length; i++) {
-            table += '<tr>';
-            for (var j = 0; j < rows[i].length; j++) {
-              table += '<td>' + rows[i][j] + '</td>';
-            }
-            table += '</tr>';
-          }
-          table += '</table>';
-          $('#routine-table').html(table);
-          highlightToday();
-        }).done(function() {
-          checkAllContentLoaded();
-        });
-
-        function highlightToday() {
-          var today = new Date().toLocaleString('en-us', { weekday: 'long' });
-          $('td').filter(function() {
-            return $(this).text() === today;
-          }).css('background-color', '#75caff');
-        }
-
-        // Function to check if all content is loaded
-        function checkAllContentLoaded() {
-          if ($('#notice-content').html() !== '' && $('#routine-table').html() !== '') {
-            $('.preloader').fadeOut(2000, function() {
-              $(this).remove(); // Remove preloader after fadeout
-            });
-          }
-        }
-      });
-    });
-
-    // Exam schedule logic
-    const sheetNameSchedule = 'Sheet1'; // Assuming the sheet name is 'Sheet1'
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${scheduleSheetID}/values/${sheetNameSchedule}?key=${API_KEY}`;
-
-    $.getJSON(url, function(data) {
-      const rows = data.values;
-      
-      // Get today's date and format it as DD-MM-YYYY
-      const today = new Date();
-      const todayFormatted = today.toLocaleDateString('en-GB').split('/').reverse().join('-');
-
-      for (let i = 1; i < rows.length; i++) {
-        const row = rows[i];
-        const date = row[3]; // Date is in the 4th column (D)
-        let highlightClass = '';
-
-        if (date === todayFormatted) {
-          highlightClass = 'highlight_exam';
-        }
-
-        // Check if Exam Link is not 'none' and create a hyperlink
-        const examLink = row[4] !== 'none' ? `<a href="${row[4]}" target="_blank">Exam Link</a>` : 'none';
-
-        $('#scheduleTable tbody').append(
-          `<tr class="${highlightClass}">
-            <td>${row[0]}</td>
-            <td>${row[1]}</td>
-            <td>${row[2]}</td>
-            <td>${row[3]}</td>
-            <td>${examLink}</td>
-          </tr>`
-        );
-      }
-    });
-
-    // Function for hamburger menu on small screens
-    function toggleMenu() {
-      var menu = document.getElementById('menu');
-      if (menu.style.transform === 'translateX(0%)') {
-        menu.style.transform = 'translateX(100%)';
-      } else {
-        menu.style.transform = 'translateX(0%)';
-      }
-    }
-
-    function handleClickOutsideMenu(event) {
-      var menu = document.getElementById('menu');
-      var menuIcon = document.getElementById('menu-icon');
-      if (!menu.contains(event.target) && !menuIcon.contains(event.target)) {
-        menu.style.transform = 'translateX(100%)';
-      }
-    }
-
-    function updateMenuEventListeners() {
-      if (window.innerWidth <= 768) {
-        document.addEventListener('click', handleClickOutsideMenu);
-      } else {
-        document.removeEventListener('click', handleClickOutsideMenu);
-        var menu = document.getElementById('menu');
-        menu.style.transform = 'translateX(0%)';
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', updateMenuEventListeners);
-    window.addEventListener('resize', updateMenuEventListeners);
-
-    // Cookie handling
-    function getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(';').shift();
-    }
-
-    $(document).ready(function() {
-      // Check if a valid studentID cookie exists
-      var studentID = getCookie('studentID');
-
-      if (studentID) {
-        // If studentID cookie exists, user is considered logged in
-        $('.login-btn').hide(); // Hide login button
-        $('.exam-btn').show();  // Show exam buttons
-        $('.you-btn').show();   // Show 'You' button
-        $('.table-container').show();  // Show exam schedule
-        $('.one_shot_class').show();  // Show one-shot class
-      } else {
-        // If no valid studentID cookie, hide restricted content
-        $('.exam-btn').hide();
-        $('.you-btn').hide();
-        $('.table-container').hide();
-        $('.one_shot_class').hide();
-      }
-    });
-  </script>
 </body>
 </html>
